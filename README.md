@@ -1,8 +1,21 @@
 # Golang - Guia de Aprendizado
 
-<div>
-<img src="./assets/desk.svg" alt="drawing" style="width:20%;"/>Este projeto contém notas de estudo da linguagem Golang.
-</div>
+<img src="./assets/desk.svg" alt="drawing" style="width:15%;"/>
+
+Este projeto contém notas e dicas de estudo da linguagem Golang.
+
+# Conteúdo
+
+- [Arrays](./arrays/README.md)
+- [Channels](./channels/README.md)
+- [Embedded Type](./embedded_types/README.md)
+- [Interfaces](./interfaces/README.md)
+- [Loop](./loop/README.md)
+- [Primitives](./primitives/README.md)
+- [Type Assertion](./type_assertion/README.md)
+- [Variáveis & Constants](./var_const/README.md)
+- [Variadic](./variadic/README.md)
+- [Go Tools](./go_tools/README.md)
 
 # Dicas
 
@@ -17,4 +30,6 @@ fmt.Printf("var a %T = %+v\n", a, a)
 
 # Referências
 
-- [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments) - Tips and conventions the community follows
+- [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments) - Dicas e convenções seguidas pela comunidade `Go`.
+- [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md) - Um guia de estilos e elaborados pelo `Uber`.
+- [The Go Programming Language Specification](https://go.dev/ref/spec)
