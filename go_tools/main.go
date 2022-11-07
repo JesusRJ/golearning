@@ -27,6 +27,8 @@ func main() {
 
 	printStats(mem)
 
+	fmt.Println("NumCPU:", runtime.NumCPU())
+
 	// for i := 0; i < 10; i++ {
 	// 	s := make([]byte, 50000000)
 	// 	if s == nil {
