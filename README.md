@@ -31,5 +31,5 @@ fmt.Printf("var a %T = %+v\n", a, a)
 # Referências
 
 - [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments) - Dicas e convenções seguidas pela comunidade `Go`.
-- [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md) - Um guia de estilos e elaborados pelo `Uber`.
+- [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md) - Um guia de estilos elaborados pelo `Uber`.
 - [The Go Programming Language Specification](https://go.dev/ref/spec)
