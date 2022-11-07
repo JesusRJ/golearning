@@ -1,3 +1,3 @@
-module github.com/JesusRJ/golang/var_const
+module github.com/JesusRJ/golearning/var_const
 
 go 1.19

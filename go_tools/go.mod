@@ -1,3 +1,3 @@
-module github.com/JesusRJ/go_tools
+module github.com/JesusRJ/golearning/go_tools
 
-go 1.18
+go 1.19

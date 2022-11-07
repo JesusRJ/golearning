@@ -1,0 +1,17 @@
+go 1.19
+
+use (
+	./arrays
+	./channels
+	./embedded_types
+	./go_tools
+	./http
+	./interfaces
+	./loop
+	./map
+	./pointer
+	./primitives
+	./type_assertion
+	./var_const
+	./variadic
+)
