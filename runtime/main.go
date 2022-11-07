@@ -3,9 +3,12 @@ package main
 import (
 	"fmt"
 	"runtime"
+	"strconv"
+	"strings"
 )
 
 func printStats(mem runtime.MemStats) {
+	fmt.Println("---------------------------")
 	runtime.ReadMemStats(&mem)
 	fmt.Println("mem.Alloc:", mem.Alloc)
 	fmt.Println("mem.TotalAlloc:", mem.TotalAlloc)
@@ -14,7 +17,23 @@ func printStats(mem runtime.MemStats) {
 	fmt.Println("---------------------------")
 }
 
+// Print Go runtime version info
+func printVersion() {
+	myVersion := runtime.Version()
+	major := strings.Split(myVersion, ".")[0][2]
+	minor := strings.Split(myVersion, ".")[1]
+	m1, _ := strconv.Atoi(string(major))
+	m2, _ := strconv.Atoi(minor)
+	if m1 == 1 && m2 < 8 {
+		fmt.Println("Need Go version 1.8 or higher!")
+		return
+	}
+	fmt.Printf("You are using Go version 1.8 or higher! (%s)\n", myVersion)
+}
+
 func main() {
+	printVersion()
+
 	var mem runtime.MemStats
 	printStats(mem)
 

@@ -4,13 +4,13 @@ use (
 	./arrays
 	./channels
 	./embedded_types
-	./go_tools
 	./http
 	./interfaces
 	./loop
 	./map
 	./pointer
 	./primitives
+	./runtime
 	./type_assertion
 	./var_const
 	./variadic
