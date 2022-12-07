@@ -30,6 +30,8 @@ fmt.Printf("var a %T = %+v\n", a, a)
 
 # Referências
 
+- [Concurrency in Go: Tools and Techniques for Developers - Katherine Cox-Buday](https://www.amazon.com/Concurrency-Go-Tools-Techniques-Developers/dp/1491941197)
+
 - [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments) - Dicas e convenções seguidas pela comunidade `Go`.
 - [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md) - Um guia de estilos elaborados pelo `Uber`.
 - [The Go Programming Language Specification](https://go.dev/ref/spec)
