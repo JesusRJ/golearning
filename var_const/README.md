@@ -1,9 +1,5 @@
 # Variáveis e Constantes
 
-Referências:
-
-- [Como usar variáveis e constantes em Go](https://www.digitalocean.com/community/tutorials/how-to-use-variables-and-constants-in-go-pt)
-
 # Nomeando variáveis: regras e estilo
 
 A nomeação de variáveis é bastante flexível, mas existem algumas regras a serem lembradas:
@@ -30,3 +26,7 @@ for i, n := range names {
 # Valor Zero
 
 Em Go todos os tipos têm um valor zero, não podemos ter valores `undefined` [não definidos] como em algumas outras linguagens. Por exemplo, um **boolean** em algumas linguagens poderia ser `undefined`, `true`, ou `false`, o que permite três estados para a variável. Em Go, não podemos ter mais de dois estados de um valor booleano.
+
+# Referências
+
+- [Como usar variáveis e constantes em Go](https://www.digitalocean.com/community/tutorials/how-to-use-variables-and-constants-in-go-pt)
