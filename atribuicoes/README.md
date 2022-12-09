@@ -35,10 +35,10 @@ medals[2] = "bronze"
 ```
 - Mapas e canais, embora não sejam variáveis comuns, também estão sujeitos a atribuições implicitas semelhantes;
 
-> Independente de ser explícita ou implícita, uma atribuição é sempre permitida se o lado esquerdo e direito forem do mesmo tipo: a atribuição só é permitida se o valor puder ser atribuído ao tipo da variável.
+> :mega: Independente de ser explícita ou implícita, uma atribuição é sempre permitida se o lado esquerdo e direito forem do mesmo tipo: a atribuição só é permitida se o valor puder ser atribuído ao tipo da variável.
 
 ## Atribuição de Tupla
 
 A `atribuição de tupla` permite que diversas variáveis recebam valores de uma única vez.
 
-> :star: Todas as expressões do lado direito são avaliadas antes que qualquer variável do lado esquerdo seja atualizado.
+> :mega: Todas as expressões do lado direito são avaliadas antes que qualquer variável do lado esquerdo seja atualizada.
