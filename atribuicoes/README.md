@@ -60,7 +60,7 @@ x, y, z = 1, 2, 3
 
 > :exclamation: Por questões de estilo, você deve evitar a forma de tuplas se as expressões forem complexas, pois uma sequência de instruções separadas é mais fácil de ler.
 
-Algumas expressões (funções, [type assertion](../type_assertion/README.md), [channels](../channels/README.md)(asserção de tipo)) usam a forma de tupla para retornar mais de um valor. Quado uma chamada desse tipo é usada em uma instrução de atribuição, o lado esquerdo deve conter tantas variáveis quanto forem os resultados da expressão:
+Algumas expressões (funções, [type assertion](../type_assertion/README.md), [channels](../channels/README.md)(asserção de tipo)) usam a forma de tupla para retornar mais de um valor. Quando uma chamada desse tipo é usada em uma instrução de atribuição, o lado esquerdo deve conter tantas variáveis quanto forem os resultados da expressão:
 
 ```golang
 f, err := os.Open("teste.txt")

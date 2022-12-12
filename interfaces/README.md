@@ -6,10 +6,10 @@ Interfaces são `tipos abstratos` que definem um conjunto de funções que devem
 
 Todos os métodos de um tipo de interface são considerados a interface.
 
-> Para um tipo satisfazer uma interface ele deve implementar todos os métodos requeridos por aquela interface.
+> :exclamation: Para um tipo satisfazer uma interface ele deve implementar todos os métodos requeridos por aquela interface.
 
 Uma `interface` é duas coisas: um conjunto de métodos (method set) e um tipo (type).
-
+ 
 A maior vantagem de usar interfaces é que você pode passar uma variável que implementa uma interface em particular para qualquer função que espera um parâmetro daquela interface específica, o que permite escrever funções mais flexíveis e adaptáveis que não dependam de uma implementação única.
 
 # Referências

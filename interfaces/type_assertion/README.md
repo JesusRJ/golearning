@@ -1,6 +1,8 @@
 # Asserção de Tipo (Type Assertion)
 
-Asserção de tipo (`Type assertion`) é como podemos verificar a que tipo pertence uma variável.
+Asserção de tipo (`Type assertion`) é como podemos verificar se uma variável satisfaz uma determinada interface.
+
+
 
 Só pode ser usado com `interfaces`.
 
