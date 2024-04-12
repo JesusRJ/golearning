@@ -11,7 +11,7 @@ esquema pub/sub
 
 - Publicar pra channel não inicializado é uma operação blockante ad eterno
 - Publicar pra channel fechado causa panic na aplicação
-- Chamar .close() de um canal fechado tmb causa panic
+- Chamar close() em um canal fechado tmb causa panic
 - \*\*Em um for-select eventualmente o go irá escolher um valor do canal caso eles estejam concorrendo/chegando ao mesmo tempo: por causa disso é usual termos selects dentro de selects para revalidarmos condições
 
 # Tricks
