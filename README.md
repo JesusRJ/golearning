@@ -16,6 +16,7 @@ Este projeto contém notas e dicas de estudo da linguagem Golang.
 - [Variáveis & Constants](./var_const/README.md)
 - [Variadic](./variadic/README.md)
 - [Go Tools](./go_tools/README.md)
+- [Style Code](./style_code/README.md)
 
 # Dicas
 
