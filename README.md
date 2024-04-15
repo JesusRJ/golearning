@@ -12,7 +12,7 @@ Este projeto contém notas e dicas de estudo da linguagem Golang.
 - [Interfaces](./interfaces/README.md)
 - [Loop](./loop/README.md)
 - [Primitives](./primitives/README.md)
-- [Type Assertion](./type_assertion/README.md)
+- [Type Assertion](./interfaces/type_assertion/README.md)
 - [Variáveis & Constants](./var_const/README.md)
 - [Variadic](./variadic/README.md)
 - [Go Tools](./go_tools/README.md)
@@ -31,7 +31,6 @@ fmt.Printf("var a %T = %+v\n", a, a)
 # Referências
 
 - [Concurrency in Go: Tools and Techniques for Developers - Katherine Cox-Buday](https://www.amazon.com/Concurrency-Go-Tools-Techniques-Developers/dp/1491941197)
-
-- [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments) - Dicas e convenções seguidas pela comunidade `Go`.
+- [Go Code Review Comments](https://go.dev/wiki/CodeReviewComments) - Dicas e convenções seguidas pela comunidade `Go`.
 - [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md) - Um guia de estilos elaborados pelo `Uber`.
 - [The Go Programming Language Specification](https://go.dev/ref/spec)

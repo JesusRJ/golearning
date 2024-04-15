@@ -2,6 +2,7 @@ go 1.19
 
 use (
 	./arrays
+	./bitwise
 	./channels
 	./embedded_types
 	./http
