@@ -4,3 +4,5 @@ Quando se usa um ponteiro como variáveil de controle em um loop `for`, a avalia
 Isto causa que todas as referências internas no loop apontem para o mesmo lugar.
 
 Para resolver isso é necessário realizar o reassing para uma variável interna ao loop.
+
+> Este comportamento foi alterado na versão do `1.21` do `Go`!
