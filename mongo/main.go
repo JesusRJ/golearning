@@ -70,16 +70,12 @@ func FindWithAggregate(ctx context.Context, coll *mongo.Collection) {
 			{"as", "companies"},
 		}},
 	}
-	// set := bson.D{{"$unwind", bson.M{
-	// 	"path":                       "$companies",
-	// 	"preserveNullAndEmptyArrays": true,
-	// }}}
 
-	addFields := bson.D{
-		{"$addFields", bson.M{"company": bson.M{"$arrayElemAt": bson.A{"$companies", 0}}}},
+	setFields := bson.D{
+		{"$set", bson.M{"company": bson.M{"$arrayElemAt": bson.A{"$companies", 0}}}},
 	}
 
-	c, err := coll.Aggregate(ctx, mongo.Pipeline{match, lookup, addFields})
+	c, err := coll.Aggregate(ctx, mongo.Pipeline{match, lookup, setFields})
 	if err != nil {
 		log.Printf("failed to get users (aggregate): %+v", err)
 		os.Exit(1)
