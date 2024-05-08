@@ -8,6 +8,7 @@ import (
 
 	"github.com/JesusRJ/golearning/mongo/codecs"
 	"github.com/JesusRJ/golearning/mongo/model"
+	"github.com/jedib0t/go-pretty/v6/table"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -15,8 +16,6 @@ import (
 )
 
 const mongDSN = "mongodb://root:MongoPass321!@localhost:27017"
-
-// var Database *mongo.Database
 
 func main() {
 	ctx := context.Background()
@@ -35,7 +34,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	db := Client.Database("petshop")
+	db := Client.Database("petshop_test")
 	collUsers := db.Collection(model.CollUser)
 
 	// Find(ctx, collUsers)
@@ -61,21 +60,29 @@ func Find(ctx context.Context, coll *mongo.Collection) {
 }
 
 func FindWithAggregate(ctx context.Context, coll *mongo.Collection) {
-	match := bson.D{{"$match", bson.M{"company_id": getCompanyID()}}}
+	match := bson.D{{Key: "$match", Value: bson.M{"company_id": getCompanyID()}}}
 	lookup := bson.D{
-		{"$lookup", bson.D{
-			{"from", "company"},
-			{"localField", "company_id"},
-			{"foreignField", "_id"},
-			{"as", "companies"},
+		{Key: "$lookup", Value: bson.D{
+			{Key: "from", Value: "company"},
+			{Key: "localField", Value: "company_id"},
+			{Key: "foreignField", Value: "_id"},
+			{Key: "as", Value: "companies"},
+		}},
+	}
+	lookupPet := bson.D{
+		{Key: "$lookup", Value: bson.D{
+			{Key: "from", Value: "pet"},
+			{Key: "localField", Value: "_id"},
+			{Key: "foreignField", Value: "user_id"},
+			{Key: "as", Value: "pets"},
 		}},
 	}
 
 	setFields := bson.D{
-		{"$set", bson.M{"company": bson.M{"$arrayElemAt": bson.A{"$companies", 0}}}},
+		{Key: "$set", Value: bson.M{"company": bson.M{"$arrayElemAt": bson.A{"$companies", 0}}}},
 	}
 
-	c, err := coll.Aggregate(ctx, mongo.Pipeline{match, lookup, setFields})
+	c, err := coll.Aggregate(ctx, mongo.Pipeline{match, lookup, lookupPet, setFields})
 	if err != nil {
 		log.Printf("failed to get users (aggregate): %+v", err)
 		os.Exit(1)
@@ -87,13 +94,43 @@ func FindWithAggregate(ctx context.Context, coll *mongo.Collection) {
 		os.Exit(1)
 	}
 
-	for _, u := range users {
-		// fmt.Printf("%+v | %s \n", u, u.Company[0].Name)
-		fmt.Printf("%+v", u)
-	}
+	// for _, u := range users {
+	// 	// fmt.Printf("%+v | %s \n", u, u.Company[0].Name)
+	// 	fmt.Printf("%+v", u.Company)
+	// }
+
+	printUsers(users)
 }
 
 func getCompanyID() primitive.ObjectID {
 	id, _ := primitive.ObjectIDFromHex("6632bff5465065406a8f320a")
 	return id
+}
+
+func printUsers(users []model.User) {
+	t := table.NewWriter()
+	t.SetOutputMirror(os.Stdout)
+	t.AppendHeader(table.Row{"User", "Address", "Phones", "Company", "Pets"})
+
+	for _, u := range users {
+		phones := getCommaSeparated(u.Phone)
+		pets := getCommaSeparated(u.Pets)
+
+		t.AppendRows([]table.Row{
+			{u.Name, u.Address, phones, u.Company, pets},
+		})
+	}
+
+	t.AppendFooter(table.Row{"", "", "", "Count", len(users)})
+	t.Render()
+}
+
+func getCommaSeparated[T interface{ String() string }](values []T) (result string) {
+	for _, v := range values {
+		result = fmt.Sprintf("%s, %s", result, v)
+	}
+	if result != "" {
+		return result[1:]
+	}
+	return result
 }

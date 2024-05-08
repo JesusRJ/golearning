@@ -1,0 +1,83 @@
+[
+  {
+    "_id": {
+      "$oid": "661f17bffc35c18b2f85e975"
+    },
+    "created_at": {
+      "$date": "2024-05-07T12:11:33.408Z"
+    },
+    "updated_at": {
+      "$date": "2024-05-07T12:11:33.408Z"
+    },
+    "name": "user_0",
+    "address": null,
+    "phones": [
+      {
+        "number": "(31) 1111-1111"
+      },
+      {
+        "number": "(31) 2222-2222"
+      }
+    ],
+    "company_id": {
+      "$oid": "6632bff5465065406a8f320a"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "661f190a5cb5decb102f46d4"
+    },
+    "created_at": {
+      "$date": "2024-05-07T12:11:33.434Z"
+    },
+    "updated_at": {
+      "$date": "2024-05-07T12:11:33.458Z"
+    },
+    "name": "update",
+    "address": {
+      "street": "Avocato",
+      "number": 0
+    },
+    "phones": null,
+    "company_id": {
+      "$oid": "6632bff5465065406a8f320a"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "661f22a7617c1b65a5abdfd5"
+    },
+    "created_at": {
+      "$date": "2024-05-07T12:11:33.438Z"
+    },
+    "updated_at": {
+      "$date": "2024-05-07T12:11:33.461Z"
+    },
+    "name": "update",
+    "address": {
+      "street": "Avocato",
+      "number": 0
+    },
+    "phones": null,
+    "company_id": {
+      "$oid": "6632bff5465065406a8f320a"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "663a1a75da96a5c80c5961d0"
+    },
+    "created_at": {
+      "$date": "2024-05-07T12:11:33.449Z"
+    },
+    "updated_at": {
+      "$date": "2024-05-07T12:11:33.449Z"
+    },
+    "name": "create",
+    "address": null,
+    "phones": null,
+    "company_id": {
+      "$oid": "6632bff5465065406a8f320a"
+    }
+  }
+]
