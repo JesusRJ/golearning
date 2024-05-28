@@ -66,11 +66,6 @@ func FindWithAggregate(ctx context.Context, coll *mongo.Collection) {
 		os.Exit(1)
 	}
 
-	// for _, u := range users {
-	// 	// fmt.Printf("%+v | %s \n", u, u.Company[0].Name)
-	// 	fmt.Printf("%+v", u.Company)
-	// }
-
 	utils.PrintUsers(users)
 }
 

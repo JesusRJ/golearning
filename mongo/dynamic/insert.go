@@ -18,9 +18,9 @@ func InsertNewUser(ctx context.Context, coll *mongo.Collection) *model.User {
 	defType := reflect.StructOf(fields)
 
 	value := reflect.New(defType)
-	value.Elem().FieldByName("Name").SetString("Dynamic Test")
-	// value.Elem().FieldByName("Company").SetBytes([]byte("6632bff5465065406a8f320a"))\
 	id, _ := primitive.ObjectIDFromHex("6632bff5465065406a8f320a")
+
+	value.Elem().FieldByName("Name").SetString("Dynamic Test")
 	value.Elem().FieldByName("Company").Set(reflect.ValueOf(id))
 
 	coll.InsertOne(ctx, value.Interface())
