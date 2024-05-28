@@ -29,7 +29,7 @@ type User struct {
 	Name    string   `bson:"name"`
 	Address *Address `bson:"address"` // embedded
 	Phone   []*Phone `bson:"phones"`  // embedded
-	Company *Company `bson:"company"`
+	Company *Company `bson:"company" relation:"belongsTo"`
 	Pets    []*Pet   `bson:"pets"`
 }
 
