@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"os"
 
@@ -10,6 +9,7 @@ import (
 	"github.com/JesusRJ/golearning/mongo/dynamic"
 	"github.com/JesusRJ/golearning/mongo/find"
 	"github.com/JesusRJ/golearning/mongo/model"
+	"github.com/JesusRJ/golearning/mongo/utils"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -36,8 +36,20 @@ func main() {
 	db := Client.Database("petshop_test")
 	collUsers := db.Collection(model.CollUser)
 
-	newUser := dynamic.InsertNewUser(ctx, collUsers)
-	fmt.Printf("%+v", newUser)
+	// dynamic.InsertNewUser(ctx, collUsers)
+
+	newUser := model.User{
+		Name: "Dynamic Test",
+		Company: &model.Company{
+			Entity: model.Entity{ID: utils.GetCompanyID()},
+		},
+		Address: &model.Address{Street: "Test Street", Number: 123},
+		// Pets: []*model.Pet{
+		// 	{Name: "Dog"},
+		// 	{Name: "Cat"},
+		// },
+	}
+	dynamic.InsertNewUserByRef(ctx, collUsers, &newUser)
 
 	// find.Find(ctx, collUsers)
 	find.FindWithAggregate(ctx, collUsers)

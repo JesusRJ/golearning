@@ -9,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func InsertNewUser(ctx context.Context, coll *mongo.Collection) *model.User {
+func InsertNewUser(ctx context.Context, coll *mongo.Collection) {
 	fields := []reflect.StructField{
 		{Name: "Name", Type: reflect.TypeOf(""), Tag: reflect.StructTag(`bson:"name"`)},
 		{Name: "Company", Type: reflect.TypeOf(primitive.NilObjectID), Tag: reflect.StructTag(`bson:"company_id"`)},
@@ -24,6 +24,10 @@ func InsertNewUser(ctx context.Context, coll *mongo.Collection) *model.User {
 	value.Elem().FieldByName("Company").Set(reflect.ValueOf(id))
 
 	coll.InsertOne(ctx, value.Interface())
+}
 
-	return nil
+func InsertNewUserByRef(ctx context.Context, coll *mongo.Collection, user *model.User) {
+
+	coll.InsertOne(ctx, user)
+
 }

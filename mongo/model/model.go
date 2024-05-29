@@ -29,8 +29,9 @@ type User struct {
 	Name    string   `bson:"name"`
 	Address *Address `bson:"address"` // embedded
 	Phone   []*Phone `bson:"phones"`  // embedded
-	Company *Company `bson:"company_id" localField:"company_id" foreignField:"_id"`
-	Pets    []*Pet   `bson:"pets"`
+	// Tag couldn't be "company_id" because of the ref field name
+	Company *Company `bson:"company" ref:"belongsTo"`
+	Pets    []*Pet   `bson:"pets" ref:"hasMany"`
 }
 
 type Address struct {
