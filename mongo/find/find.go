@@ -35,7 +35,11 @@ func FindWithAggregate(ctx context.Context, coll *mongo.Collection) {
 	match := bson.D{{Key: "$match", Value: bson.M{"company_id": getCompanyID()}}}
 	lookup := bson.D{
 		{Key: "$lookup", Value: bson.D{
-			{Key: "from", Value: "company"},
+			// "company_id/company" Value is bson name in Company field's User model reference.
+			// Could be anything, but by convention and to save reference between model and document db,
+			// prefer add suffix "_id" to end
+			// {Key: "from", Value: "company"}, // first test
+			{Key: "from", Value: "company_id"},
 			{Key: "localField", Value: "company_id"},
 			{Key: "foreignField", Value: "_id"},
 			{Key: "as", Value: "companies"},
@@ -51,7 +55,9 @@ func FindWithAggregate(ctx context.Context, coll *mongo.Collection) {
 	}
 
 	setFields := bson.D{
-		{Key: "$set", Value: bson.M{"company": bson.M{"$arrayElemAt": bson.A{"$companies", 0}}}},
+		// Here "company_id" should be like $lookup, keeping reference to User model Company field bson name
+		// {Key: "$set", Value: bson.M{"company": bson.M{"$arrayElemAt": bson.A{"$companies", 0}}}}, // first test
+		{Key: "$set", Value: bson.M{"company_id": bson.M{"$arrayElemAt": bson.A{"$companies", 0}}}},
 	}
 
 	c, err := coll.Aggregate(ctx, mongo.Pipeline{match, lookup, lookupPet, setFields})
