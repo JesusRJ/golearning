@@ -54,6 +54,7 @@ func FindWithAggregate(ctx context.Context, coll *mongo.Collection) {
 		}},
 	}
 
+	// Use setFields to set the first element as value to
 	setFields := bson.D{
 		// Here "company_id" should be like $lookup, keeping reference to User model Company field bson name
 		// {Key: "$set", Value: bson.M{"company": bson.M{"$arrayElemAt": bson.A{"$companies", 0}}}}, // first test
