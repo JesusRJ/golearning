@@ -64,15 +64,11 @@ func parseTags(key string, tag string) (StructTag, error) {
 		return StructTag{}, errors.New("invalid tag format")
 	}
 
-	for i := range tags {
-		tags[i] = strings.TrimSpace(tags[i])
-	}
-
 	st := StructTag{
-		From:         tags[1],
-		LocalField:   tags[2],
-		ForeignField: tags[3],
-		As:           key,
+		From:         strings.TrimSpace(tags[1]),
+		LocalField:   strings.TrimSpace(tags[2]),
+		ForeignField: strings.TrimSpace(tags[3]),
+		As:           strings.TrimSpace(key),
 	}
 
 	switch tags[0] {
@@ -84,8 +80,9 @@ func parseTags(key string, tag string) (StructTag, error) {
 		return StructTag{}, errors.New("invalid relation type, must be 'belongsTo' or 'hasMany'")
 	}
 
+	// Replace default "As" name with the one provided in the tag
 	if len(tags) == maxTags {
-		st.As = tags[4]
+		st.As = strings.TrimSpace(tags[4])
 	}
 
 	return st, nil
