@@ -56,5 +56,5 @@ func main() {
 	dynamic.InsertNewUserByRef(ctx, collUsers, &newUser)
 
 	// find.Find(ctx, collUsers)
-	find.FindWithAggregate(ctx, collUsers)
+	find.FindWithAggregate[model.User](ctx, collUsers)
 }
