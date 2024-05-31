@@ -30,8 +30,8 @@ type User struct {
 	Address *Address `bson:"address"` // embedded
 	Phone   []*Phone `bson:"phones"`  // embedded
 	// Tag couldn't be "company_id" because of the ref field name
-	Company *Company `bson:"company" ref:"belongsTo"`
-	Pets    []*Pet   `bson:"pets" ref:"hasMany"`
+	Company *Company `bson:"company" ref:"belongsTo,company,company_id,_id,companies"`
+	Pets    []*Pet   `bson:"pets"`
 }
 
 type Address struct {

@@ -51,8 +51,8 @@ type StructTag struct {
 var DefaultStructTagParser StructTagParserFunc = func(sf reflect.StructField) (StructTag, error) {
 	key := strings.ToLower(sf.Name)
 	tag, ok := sf.Tag.Lookup("ref")
-	if !ok && !strings.Contains(string(sf.Tag), ":") && len(sf.Tag) > 0 {
-		tag = string(sf.Tag)
+	if !ok {
+		return StructTag{}, nil
 	}
 	return parseTags(key, tag)
 }

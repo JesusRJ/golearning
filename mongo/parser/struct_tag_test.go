@@ -70,6 +70,12 @@ func TestDefaultStructTagParser(t *testing.T) {
 			},
 			true,
 		},
+		{
+			"no_tag",
+			"",
+			StructTag{},
+			false,
+		},
 	}
 
 	for _, tt := range tb {
