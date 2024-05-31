@@ -2,8 +2,10 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"github.com/JesusRJ/golearning/mongo/codecs"
 	"github.com/JesusRJ/golearning/mongo/dynamic"
@@ -38,12 +40,14 @@ func main() {
 
 	// dynamic.InsertNewUser(ctx, collUsers)
 
+	now := time.Now().Format("04-05")
+
 	newUser := model.User{
-		Name: "Dynamic Test",
+		Name: fmt.Sprintf("Dynamic Test %v", now),
 		Company: &model.Company{
 			Entity: model.Entity{ID: utils.GetCompanyID()},
 		},
-		Address: &model.Address{Street: "Test Street", Number: 123},
+		Address: &model.Address{Street: fmt.Sprintf("street %v", now), Number: 123},
 		// Pets: []*model.Pet{
 		// 	{Name: "Dog"},
 		// 	{Name: "Cat"},

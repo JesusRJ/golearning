@@ -27,7 +27,38 @@ func InsertNewUser(ctx context.Context, coll *mongo.Collection) {
 }
 
 func InsertNewUserByRef(ctx context.Context, coll *mongo.Collection, user *model.User) {
+	v := reflect.ValueOf(user)
+	if v.Kind() == reflect.Ptr {
+		v = v.Elem()
+	}
 
-	coll.InsertOne(ctx, user)
+	fields := make([]reflect.StructField, v.NumField())
+	values := make([]any, v.NumField())
+	for x := range v.NumField() {
+		valueField := v.Field(x)
+		typeField := v.Type().Field(x)
 
+		var value any = valueField.Interface()
+		if typeField.Tag.Get("ref") == "belongsTo" {
+			// Convert company field to primitive.ObjectID
+			typeField = reflect.StructField{
+				Name: typeField.Name,
+				Type: reflect.TypeOf(primitive.NilObjectID),
+				Tag:  reflect.StructTag(`bson:"company_id"`),
+			}
+
+			value = valueField.Interface().(*model.Company).ID
+		}
+		fields[x] = typeField
+		values[x] = value
+	}
+
+	defType := reflect.StructOf(fields)
+	value := reflect.New(defType)
+
+	for v := range values {
+		value.Elem().Field(v).Set(reflect.ValueOf(values[v]))
+	}
+
+	coll.InsertOne(ctx, value.Interface())
 }
