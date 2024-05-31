@@ -34,18 +34,18 @@ func FindWithAggregate(ctx context.Context, coll *mongo.Collection) {
 	match := bson.D{{Key: "$match", Value: bson.M{"company_id": utils.GetCompanyID()}}}
 	lookup := bson.D{
 		{Key: "$lookup", Value: bson.D{
-			{Key: "from", Value: "company"},          // collection name
-			{Key: "localField", Value: "company_id"}, // field in User model
-			{Key: "foreignField", Value: "_id"},      // field in Company model
-			{Key: "as", Value: "companies"},          // alias to store the result of the lookup
+			{Key: "from", Value: "company"},          // collection to join
+			{Key: "localField", Value: "company_id"}, // field from the input documents
+			{Key: "foreignField", Value: "_id"},      // field from the documents of the "from" collection
+			{Key: "as", Value: "companies"},          // output array field
 		}},
 	}
 	lookupPet := bson.D{
 		{Key: "$lookup", Value: bson.D{
-			{Key: "from", Value: "pet"},             // collection name
-			{Key: "localField", Value: "_id"},       // field in User model
-			{Key: "foreignField", Value: "user_id"}, // field in Pet model
-			{Key: "as", Value: "pets"},              // alias to store the result of the lookup
+			{Key: "from", Value: "pet"},             // collection to join
+			{Key: "localField", Value: "_id"},       // field from the input documents
+			{Key: "foreignField", Value: "user_id"}, // field from the documents of the "from" collection
+			{Key: "as", Value: "pets"},              // output array field
 		}},
 	}
 
