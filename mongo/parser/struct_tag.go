@@ -8,7 +8,7 @@ import (
 
 const minTags = 4
 const maxTags = 5
-const tagRef = "ref"
+const refTag = "ref"
 
 const (
 	None RelationType = iota
@@ -69,7 +69,7 @@ func (st StructTag) HasMany() bool {
 //	}
 var DefaultStructTagParser StructTagParserFunc = func(sf reflect.StructField) (StructTag, error) {
 	key := strings.ToLower(sf.Name)
-	tag, ok := sf.Tag.Lookup(tagRef)
+	tag, ok := sf.Tag.Lookup(refTag)
 	if !ok {
 		return StructTag{}, nil
 	}
