@@ -40,10 +40,12 @@ type StructTag struct {
 	As           string
 }
 
+// BelongsTo returns true if the relation is belongs to.
 func (st StructTag) BelongsTo() bool {
 	return st.Relation == BelongsTo
 }
 
+// HasMany returns true if the relation is has many.
 func (st StructTag) HasMany() bool {
 	return st.Relation == HasMany
 }

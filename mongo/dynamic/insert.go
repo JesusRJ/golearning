@@ -34,8 +34,8 @@ func InsertNewUserByRef(ctx context.Context, coll *mongo.Collection, user *model
 		v = v.Elem()
 	}
 
-	fields := make([]reflect.StructField, v.NumField())
-	values := make([]any, v.NumField())
+	fields := []reflect.StructField{}
+	values := []any{}
 	for x := range v.NumField() {
 		valueField := v.Field(x)
 		typeField := v.Type().Field(x)
@@ -45,19 +45,24 @@ func InsertNewUserByRef(ctx context.Context, coll *mongo.Collection, user *model
 			panic(err)
 		}
 
-		var value any = valueField.Interface()
-		if structTag.BelongsTo() {
-			// Convert company field to primitive.ObjectID
+		value := valueField.Interface()
+
+		switch structTag.Relation {
+		case parser.BelongsTo:
+			// Convert field to primitive.ObjectID
 			typeField = reflect.StructField{
 				Name: typeField.Name,
 				Type: reflect.TypeOf(primitive.NilObjectID),
 				Tag:  reflect.StructTag(fmt.Sprintf(`bson:"%s"`, structTag.LocalField)),
 			}
-
-			value = valueField.Interface().(*model.Company).ID
+			value = valueField.Interface().(model.AbstractEntity).GetID()
+		case parser.HasMany:
+			// Ignore hasMany field on insert/update operation
+			continue
 		}
-		fields[x] = typeField
-		values[x] = value
+
+		fields = append(fields, typeField)
+		values = append(values, value)
 	}
 
 	defType := reflect.StructOf(fields)

@@ -13,10 +13,18 @@ const (
 	CollPets    = "pet"
 )
 
+type AbstractEntity interface {
+	GetID() primitive.ObjectID
+}
+
 type Entity struct {
 	ID primitive.ObjectID `bson:"_id,omitempty"`
 	// CreatedAt time.Time          `bson:"created_at,omitempty"`
 	// UpdatedAt time.Time          `bson:"updated_at,omitempty"`
+}
+
+func (e *Entity) GetID() primitive.ObjectID {
+	return e.ID
 }
 
 type Company struct {
