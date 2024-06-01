@@ -46,7 +46,7 @@ func InsertNewUserByRef(ctx context.Context, coll *mongo.Collection, user *model
 		}
 
 		var value any = valueField.Interface()
-		if structTag.BelongsTo {
+		if structTag.BelongsTo() {
 			// Convert company field to primitive.ObjectID
 			typeField = reflect.StructField{
 				Name: typeField.Name,

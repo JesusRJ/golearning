@@ -9,6 +9,15 @@ import (
 const minTags = 4
 const maxTags = 5
 
+const (
+	None RelationType = iota
+	BelongsTo
+	HasMany
+)
+
+// Relation represents the relation type between two models.
+type RelationType int
+
 // StructTagParser returns the struct tags for a given struct field.
 type StructTagParser interface {
 	ParseStructTag(reflect.StructField) (StructTag, error)
@@ -24,12 +33,19 @@ func (f StructTagParserFunc) ParseStructTag(sf reflect.StructField) (StructTag, 
 
 // StructTag represents the struct tag fields
 type StructTag struct {
-	BelongsTo    bool
-	HasMany      bool
+	Relation     RelationType
 	From         string
 	LocalField   string
 	ForeignField string
 	As           string
+}
+
+func (st StructTag) BelongsTo() bool {
+	return st.Relation == BelongsTo
+}
+
+func (st StructTag) HasMany() bool {
+	return st.Relation == HasMany
 }
 
 // DefaultStructTagParser is the StructTagParser used by default.
@@ -73,11 +89,11 @@ func parseTags(key string, tag string) (StructTag, error) {
 
 	switch tags[0] {
 	case "belongsTo":
-		st.BelongsTo = true
+		st.Relation = BelongsTo
 	case "hasMany":
-		st.HasMany = true
+		st.Relation = HasMany
 	default:
-		return StructTag{}, errors.New("invalid relation type, must be 'belongsTo' or 'hasMany'")
+		st.Relation = None
 	}
 
 	// Replace default "As" name with the one provided in the tag

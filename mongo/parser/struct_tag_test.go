@@ -16,7 +16,7 @@ func TestDefaultStructTagParser(t *testing.T) {
 			"belongsTo",
 			`ref:"belongsTo,company,company_id,_id"`,
 			StructTag{
-				BelongsTo:    true,
+				Relation:     BelongsTo,
 				From:         "company",
 				LocalField:   "company_id",
 				ForeignField: "_id",
@@ -28,7 +28,7 @@ func TestDefaultStructTagParser(t *testing.T) {
 			"hasMany",
 			`ref:"hasMany,company,company_id,_id"`,
 			StructTag{
-				HasMany:      true,
+				Relation:     HasMany,
 				From:         "company",
 				LocalField:   "company_id",
 				ForeignField: "_id",
@@ -40,7 +40,7 @@ func TestDefaultStructTagParser(t *testing.T) {
 			"with_as_field",
 			`ref:"belongsTo,company,company_id,_id,asField"`,
 			StructTag{
-				BelongsTo:    true,
+				Relation:     BelongsTo,
 				From:         "company",
 				LocalField:   "company_id",
 				ForeignField: "_id",
@@ -60,8 +60,8 @@ func TestDefaultStructTagParser(t *testing.T) {
 			true,
 		},
 		{
-			"error_invalid_relation",
-			`ref:"oneToOne,,,,"`,
+			"error_invalid_tag",
+			`ref:"belongsTo,company,company_id"`,
 			StructTag{
 				From:         "",
 				LocalField:   "",

@@ -49,7 +49,7 @@ func FindWithAggregate[T any](ctx context.Context, coll *mongo.Collection) {
 			panic(err)
 		}
 
-		if st.BelongsTo || st.HasMany {
+		if st.BelongsTo() || st.HasMany() {
 			lookup := bson.D{
 				{Key: "$lookup", Value: bson.D{
 					{Key: "from", Value: st.From},                 // collection to join

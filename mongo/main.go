@@ -48,10 +48,10 @@ func main() {
 			Entity: model.Entity{ID: utils.GetCompanyID()},
 		},
 		Address: &model.Address{Street: fmt.Sprintf("street %v", now), Number: 123},
-		// Pets: []*model.Pet{
-		// 	{Name: "Dog"},
-		// 	{Name: "Cat"},
-		// },
+		Pets: []*model.Pet{
+			{Name: "Dog"},
+			{Name: "Cat"},
+		},
 	}
 	dynamic.InsertNewUserByRef(ctx, collUsers, &newUser)
 
