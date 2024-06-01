@@ -48,27 +48,19 @@ type Address struct {
 }
 
 type Phone struct {
-	User   *User  `bson:"-"`
 	Number string `bson:"number"`
 }
 
 type Pet struct {
 	Entity `bson:"inline"`
+	User   *User  `bson:"user" ref:"belongsTo,user,user_id,_id,user"`
 	Name   string `bson:"name"`
 }
 
-func (c Company) String() string {
-	return c.Name
-}
+func (c Company) String() string { return c.Name }
 
-func (a Address) String() string {
-	return fmt.Sprintf("%v (%v)", a.Street, a.Number)
-}
+func (a Address) String() string { return fmt.Sprintf("%v (%v)", a.Street, a.Number) }
 
-func (p Phone) String() string {
-	return p.Number
-}
+func (p Phone) String() string { return p.Number }
 
-func (p Pet) String() string {
-	return p.Name
-}
+func (p Pet) String() string { return p.Name }
