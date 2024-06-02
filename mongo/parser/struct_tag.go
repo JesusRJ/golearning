@@ -83,6 +83,7 @@ func parseTags(key string, tag string) (StructTag, error) {
 		return StructTag{}, errors.New("invalid tag format")
 	}
 
+	// Remove espaços em branco dos elementos da tag
 	for i := range tags {
 		tags[i] = strings.TrimSpace(tags[i])
 	}
