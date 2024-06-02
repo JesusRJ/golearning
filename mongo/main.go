@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -12,13 +13,24 @@ import (
 	"github.com/JesusRJ/golearning/mongo/find"
 	"github.com/JesusRJ/golearning/mongo/model"
 	"github.com/JesusRJ/golearning/mongo/utils"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-const mongDSN = "mongodb://root:MongoPass321!@localhost:27017"
+type Opts struct {
+	Insert bool
+}
 
+const mongDSN = "mongodb://root:MongoPass321!@localhost:27017"
 const Global = "Global"
+
+var opts Opts = Opts{}
+
+func init() {
+	flag.BoolVar(&opts.Insert, "a", false, "add new documents in collections")
+	flag.Parse()
+}
 
 func main() {
 	ctx := context.Background()
@@ -55,8 +67,28 @@ func main() {
 			{Name: "Cat"},
 		},
 	}
-	dynamic.InsertNewUserByRef(ctx, collUsers, &newUser)
+
+	if opts.Insert {
+		dynamic.InsertNewUserByRef(ctx, collUsers, &newUser)
+	}
 
 	// find.Find(ctx, collUsers)
-	find.FindWithAggregate[model.User](ctx, collUsers)
+	fmt.Println("Users")
+	find.FindWithAggregate[model.User](ctx, collUsers, filterUserByCompany(utils.GetCompanyID()))
+
+	collPets := db.Collection(model.CollPets)
+	fmt.Println("Pets")
+	find.FindWithAggregate[model.Pet](ctx, collPets, filterPetsByUser(utils.GetUserID()))
+}
+
+func filterUserByCompany(companyID any) find.Filter {
+	return func() bson.D {
+		return bson.D{{Key: "$match", Value: bson.M{"company_id": companyID}}}
+	}
+}
+
+func filterPetsByUser(userID any) find.Filter {
+	return func() bson.D {
+		return bson.D{{Key: "$match", Value: bson.M{"user_id": userID}}}
+	}
 }
