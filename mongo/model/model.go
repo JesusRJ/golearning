@@ -57,6 +57,10 @@ type Pet struct {
 	Name   string `bson:"name"`
 }
 
+func (e Entity) String() string {
+	return fmt.Sprintf("%v", e.ID)
+}
+
 func (c Company) String() string { return c.Name }
 
 func (a Address) String() string { return fmt.Sprintf("%v (%v)", a.Street, a.Number) }

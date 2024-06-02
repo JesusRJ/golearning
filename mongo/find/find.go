@@ -75,11 +75,11 @@ func FindWithAggregate[T any](ctx context.Context, coll *mongo.Collection) {
 		os.Exit(1)
 	}
 
-	var users []model.User
+	var users []T
 	if err := c.All(ctx, &users); err != nil {
 		log.Printf("failed to decode users: %+v", err)
 		os.Exit(1)
 	}
 
-	utils.PrintUsers(users)
+	utils.Print[T](users)
 }

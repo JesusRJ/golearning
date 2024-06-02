@@ -18,6 +18,8 @@ import (
 
 const mongDSN = "mongodb://root:MongoPass321!@localhost:27017"
 
+const Global = "Global"
+
 func main() {
 	ctx := context.Background()
 

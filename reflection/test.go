@@ -7,15 +7,23 @@ import (
 
 type MyFloat float64
 
+type MyStruct struct {
+	Value string
+}
+
 func main() {
+	// var x MyFloat = 35.5
+	// myStruct := MyStruct{"Hello"}
 
-	var x MyFloat = 35.5
+	var myInterface interface{} = "OI"
 
-	p := reflect.ValueOf(&x)
+	v := reflect.ValueOf(myInterface)
 
-	fmt.Println(p.Type())
-	fmt.Println(p.Kind())
-	fmt.Println(p.Elem())
-
-	fmt.Println(p.Interface())
+	fmt.Println(v.Type())
+	fmt.Println(v.Kind())
+	if v.Kind() == reflect.Ptr {
+		fmt.Println(".Elem() ->", v.Elem())
+		// fmt.Println(rValue.Elem())
+	}
+	fmt.Println(v.Interface())
 }
