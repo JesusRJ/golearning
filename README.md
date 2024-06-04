@@ -10,6 +10,8 @@ Este projeto contém notas e dicas de estudo da linguagem Golang.
 - [Channels](./channels/README.md)
 - [Embedded Type](./embedded_types/README.md)
 - [Interfaces](./interfaces/README.md)
+  - [Asserção de Tipo (Type Assertion)](./interfaces/type_assertion/README.md)
+  - [Validação em Tempo de Compilação](./interfaces/runtime_validation/README.md)
 - [Loop](./loop/README.md)
 - [Primitives](./primitives/README.md)
 - [Type Assertion](./interfaces/type_assertion/README.md)
