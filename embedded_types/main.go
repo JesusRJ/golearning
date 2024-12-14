@@ -16,14 +16,16 @@ func (p *Person) SetAge(age int) {
 
 type Singer struct {
 	Person // extends Person by embedding it
-	works  []string
 }
 
 func main() {
 	var gaga = Singer{Person: Person{"Gaga", 30}}
 	gaga.PrintName() // Name: Gaga
+
 	gaga.Name = "Lady Gaga"
+
 	(&gaga).SetAge(31)
-	(&gaga).PrintName()   // Name: Lady Gaga
+	(&gaga).PrintName() // Name: Lady Gaga
+
 	fmt.Println(gaga.Age) // 31
 }

@@ -16,4 +16,9 @@ func main() {
 
 	i := [10]int{1, 2}
 	fmt.Println(i)
+
+	values := make([]*string, 2, 10)
+	for v := range values {
+		fmt.Println(v)
+	}
 }
